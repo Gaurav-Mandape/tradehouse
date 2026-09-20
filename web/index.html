@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tradehouse | Virtual Market</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="/"><span class="brand-mark">+</span><span>tradehouse</span></a>
+      <div class="market-status"><span class="pulse"></span> Simulated market <span class="divider"></span> Single user MVP</div>
+      <div class="top-actions"><button class="icon-button" title="Refresh data" onclick="refreshAll()">↻</button><span class="avatar">JD</span></div>
+    </header>
+    <main>
+      <section class="intro"><div><p class="eyebrow">Portfolio / Overview</p><h1>Your money, in motion.</h1><p class="lede">Practice investing with historical market data. Every order is virtual.</p></div><div class="date-badge"><span>MARKET SNAPSHOT</span><strong id="snapshot-time">Loading...</strong></div></section>
+      <section class="metrics" id="metrics"><article class="metric-card accent"><span>Portfolio value</span><strong id="portfolio-value">$100,000.00</strong><small id="portfolio-pnl">+$0.00 total return</small></article><article class="metric-card"><span>Available cash</span><strong id="cash-value">$100,000.00</strong><small>Ready to invest</small></article><article class="metric-card"><span>Invested</span><strong id="invested-value">$0.00</strong><small id="holding-count">0 positions</small></article><article class="metric-card"><span>Day status</span><strong class="green">Open</strong><small>Data is simulated</small></article></section>
+      <div class="workspace-grid">
+        <section class="panel market-panel"><div class="panel-heading"><div><p class="eyebrow">Market watch</p><h2>Available stocks</h2></div><label class="search"><span>⌕</span><input id="stock-search" placeholder="Search stocks" oninput="filterStocks()"></label></div><div class="stock-table"><div class="table-head"><span>Company</span><span>Price</span><span>Change</span><span></span></div><div id="stock-list"></div></div></section>
+        <section class="panel quote-panel"><div class="panel-heading"><div><p class="eyebrow">Historical quote</p><h2>Price explorer</h2></div><span class="live-dot">CSV DATA</span></div><div class="quote-controls"><label>Stock<select id="quote-symbol" onchange="loadQuote()"></select></label><label>Date<input id="quote-date" type="date" onchange="loadQuote()"></label><label>Time<select id="quote-time" onchange="loadQuote()"></select></label></div><div class="quote-result"><div><span id="quote-name">Select a stock</span><strong id="quote-price">$--.--</strong></div><div class="quote-change" id="quote-change">--</div></div><div class="chart" id="chart"><div class="chart-grid"></div><svg viewBox="0 0 560 150" preserveAspectRatio="none"><path id="chart-area" d="M0,120 L70,108 L140,115 L210,80 L280,90 L350,62 L420,70 L490,35 L560,42 L560,150 L0,150 Z"></path><path id="chart-line" d="M0,120 L70,108 L140,115 L210,80 L280,90 L350,62 L420,70 L490,35 L560,42"></path></svg><div class="chart-labels"><span>09:30</span><span>11:00</span><span>12:30</span><span>14:00</span><span>16:00</span></div></div></section>
+      </div>
+      <div class="lower-grid">
+        <section class="panel holdings-panel"><div class="panel-heading"><div><p class="eyebrow">Your positions</p><h2>Portfolio</h2></div><span class="count-pill" id="position-count">0</span></div><div id="holdings-list" class="holdings-list"><div class="empty-state">Your portfolio is waiting for its first position.</div></div></section>
+        <section class="panel trade-panel"><div class="panel-heading"><div><p class="eyebrow">Order ticket</p><h2>Make a trade</h2></div><span class="paper-label">PAPER ONLY</span></div><div class="trade-tabs"><button class="active" id="buy-tab" onclick="setSide('BUY')">Buy</button><button id="sell-tab" onclick="setSide('SELL')">Sell</button></div><form id="trade-form" onsubmit="submitTrade(event)"><label>Stock<select id="trade-symbol"></select></label><label>Number of shares<input id="trade-quantity" type="number" min="1" step="1" value="10" required></label><div class="order-summary"><span>Estimated order value</span><strong id="order-total">$0.00</strong></div><button class="primary-button" type="submit"><span id="order-action">Buy</span> shares <span class="arrow">↗</span></button><p id="trade-message" class="form-message"></p></form></section>
+      </div>
+      <section class="panel history-panel"><div class="panel-heading"><div><p class="eyebrow">Your activity</p><h2>Transaction history</h2></div><span class="paper-label">VIRTUAL ORDERS</span></div><div class="history-table"><div class="table-head"><span>Order</span><span>Shares</span><span>Price</span><span>Total</span><span>Date & time</span></div><div id="transaction-list"><div class="empty-state">Executed orders will appear here.</div></div></div></section>
+    </main>
+    <footer><span>TRADEHOUSE / EDUCATIONAL SIMULATION</span><span>No real money. No financial advice.</span></footer>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
